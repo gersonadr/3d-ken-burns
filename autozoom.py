@@ -105,6 +105,8 @@ if __name__ == '__main__':
 		'intCropHeight': int(math.floor(0.97 * intHeight))
 	}
 
+	print (objFrom)
+
 	objTo = process_autozoom({
 		'fltShift': flvShift,
 		'fltZoom': flvZoom,
