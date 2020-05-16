@@ -52,18 +52,29 @@ exec(open('./models/pointcloud-inpainting.py', 'r').read())
 
 arguments_strIn = './images/doublestrike.jpg'
 arguments_strOut = './autozoom.mp4'
-arguments_strCenterU = ''
-arguments_strCenterV = ''
-arguments_zoom = ''
-arguments_shift = ''
+arguments_fu = ''
+arguments_fv = ''
+arguments_fw = ''
+arguments_fh = ''
+arguments_tu = ''
+arguments_tv = ''
+arguments_tw = ''
+arguments_th = ''
+arguments_steps = ''
 
 for strOption, strArgument in getopt.getopt(sys.argv[1:], '', [ strParameter[2:] + '=' for strParameter in sys.argv[1::2] ])[0]:
 	if strOption == '--in' and strArgument != '': arguments_strIn = strArgument # path to the input image
 	if strOption == '--out' and strArgument != '': arguments_strOut = strArgument # path to where the output should be stored
-	if strOption == '--centeru' and strArgument != '': arguments_strCenterU = strArgument # center horizontally (in pixels)
-	if strOption == '--centerv' and strArgument != '': arguments_strCenterV = strArgument # center vertically (in pixels)
-	if strOption == '--zoom' and strArgument != '': arguments_zoom = strArgument # zoom factor
-	if strOption == '--shift' and strArgument != '': arguments_shift = strArgument # shift ?
+	if strOption == '--fu' and strArgument != '': arguments_fu = strArgument # center horizontally (in pixels)
+	if strOption == '--fv' and strArgument != '': arguments_fv = strArgument # center vertically (in pixels)
+	if strOption == '--fw' and strArgument != '': arguments_fw = strArgument # zoom factor
+	if strOption == '--fh' and strArgument != '': arguments_fh = strArgument # shift ?
+	if strOption == '--tu' and strArgument != '': arguments_tu = strArgument # center horizontally (in pixels)
+	if strOption == '--tv' and strArgument != '': arguments_tv = strArgument # center vertically (in pixels)
+	if strOption == '--tw' and strArgument != '': arguments_tw = strArgument # zoom factor
+	if strOption == '--th' and strArgument != '': arguments_th = strArgument # shift ?
+	if strOption == '--steps' and strArgument != '': arguments_steps = strArgument # shift ?
+
 # end
 
 ##########################################################
@@ -83,38 +94,28 @@ if __name__ == '__main__':
 
 	process_load(npyImage, {})
 
-	# defaults
-	flvCenterU = intWidth / 2.0
-	flvCenterV = intHeight / 2.0
-	flvShift = 100.0
-	flvZoom = 1.25
-
-	if arguments_strCenterU != '':
-		flvCenterU = float(arguments_strCenterU)
-	if arguments_strCenterV != '':
-		flvCenterV = float(arguments_strCenterV)
-	if arguments_shift != '':
-		flvZoom = float(arguments_shift)
-	if arguments_zoom != '':
-		flvZoom = float(arguments_zoom)
-
 	objFrom = {
-		'fltCenterU': flvCenterU,
-		'fltCenterV': flvCenterV,
-		'intCropWidth': int(math.floor(0.97 * intWidth)),
-		'intCropHeight': int(math.floor(0.97 * intHeight))
+		'fltCenterU': float(arguments_fu),
+		'fltCenterV': float(arguments_fv),
+		'intCropWidth': float(arguments_fw),
+		'intCropHeight': float(arguments_fh)
 	}
 
-	print (objFrom)
+	objTo = {
+		'fltCenterU': float(arguments_tu),
+		'fltCenterV': float(arguments_tv),
+		'intCropWidth': float(arguments_tw),
+		'intCropHeight': float(arguments_th)
+	}
 
-	objTo = process_autozoom({
-		'fltShift': flvShift,
-		'fltZoom': flvZoom,
-		'objFrom': objFrom
-	})
+	# objTo = process_autozoom({
+	# 	'fltShift': flvShift,
+	# 	'fltZoom': flvZoom,
+	# 	'objFrom': objFrom
+	# })
 
 	npyResult = process_kenburns({
-		'fltSteps': numpy.linspace(0.0, 1.0, 75).tolist(),
+		'fltSteps': numpy.linspace(0.0, 1.0, int(arguments_steps)).tolist(),
 		'objFrom': objFrom,
 		'objTo': objTo,
 		'boolInpaint': True

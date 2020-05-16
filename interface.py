@@ -130,6 +130,9 @@ def update_from():
 	objPlayback['objFrom']['intCropWidth'] = int(flask.request.form['intCropWidth'])
 	objPlayback['objFrom']['intCropHeight'] = int(flask.request.form['intCropHeight'])
 
+	print ('from')
+	print (objPlayback['objFrom'])
+
 	return ''
 # end
 
@@ -141,6 +144,9 @@ def update_to():
 	objPlayback['objTo']['fltCenterV'] = float(flask.request.form['fltCenterV'])
 	objPlayback['objTo']['intCropWidth'] = int(flask.request.form['intCropWidth'])
 	objPlayback['objTo']['intCropHeight'] = int(flask.request.form['intCropHeight'])
+
+	print ('to')
+	print (objPlayback['objTo'])
 
 	return ''
 # end
