@@ -95,17 +95,17 @@ if __name__ == '__main__':
 	process_load(npyImage, {})
 
 	objFrom = {
-		'fltCenterU': float(arguments_fu),
-		'fltCenterV': float(arguments_fv),
-		'intCropWidth': float(arguments_fw),
-		'intCropHeight': float(arguments_fh)
+		'fltCenterU': int(arguments_fu),
+		'fltCenterV': int(arguments_fv),
+		'intCropWidth': int(arguments_fw),
+		'intCropHeight': int(arguments_fh)
 	}
 
 	objTo = {
-		'fltCenterU': float(arguments_tu),
-		'fltCenterV': float(arguments_tv),
-		'intCropWidth': float(arguments_tw),
-		'intCropHeight': float(arguments_th)
+		'fltCenterU': int(arguments_tu),
+		'fltCenterV': int(arguments_tv),
+		'intCropWidth': int(arguments_tw),
+		'intCropHeight': int(arguments_th)
 	}
 
 	# objTo = process_autozoom({
