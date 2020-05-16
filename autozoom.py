@@ -100,15 +100,6 @@ if __name__ == '__main__':
 	flvShift = 100.0
 	flvZoom = 1.25
 
-	if arguments_strCenterU != '':
-		flvCenterU = float(arguments_strCenterU)
-	if arguments_strCenterV != '':
-		flvCenterV = float(arguments_strCenterV)
-	if arguments_shift != '':
-		flvZoom = float(arguments_shift)
-	if arguments_zoom != '':
-		flvZoom = float(arguments_zoom)
-
 	objFrom = {
 		'fltCenterU': flvCenterU,
 		'fltCenterV': flvCenterV,
