@@ -82,23 +82,23 @@ for strOption, strArgument in getopt.getopt(sys.argv[1:], '', [ strParameter[2:]
 if __name__ == '__main__':
 	npyImage = cv2.imread(filename=arguments_strIn, flags=cv2.IMREAD_COLOR)
 
-	# intWidth = npyImage.shape[1]
-	# intHeight = npyImage.shape[0]
+	intWidth = npyImage.shape[1]
+	intHeight = npyImage.shape[0]
 
-	# fltRatio = float(intWidth) / float(intHeight)
+	fltRatio = float(intWidth) / float(intHeight)
 
-	# intWidth = min(int(1024 * fltRatio), 1024)
-	# intHeight = min(int(1024 / fltRatio), 1024)
+	intWidth = min(int(1024 * fltRatio), 1024)
+	intHeight = min(int(1024 / fltRatio), 1024)
 
-	# npyImage = cv2.resize(src=npyImage, dsize=(intWidth, intHeight), fx=0.0, fy=0.0, interpolation=cv2.INTER_AREA)
+	npyImage = cv2.resize(src=npyImage, dsize=(intWidth, intHeight), fx=0.0, fy=0.0, interpolation=cv2.INTER_AREA)
 
 	process_load(npyImage, {})
 
 	objFrom = {
-		'fltCenterU': int(arguments_fu),
-		'fltCenterV': int(arguments_fv),
-		'intCropWidth': int(arguments_fw),
-		'intCropHeight': int(arguments_fh)
+		'fltCenterU': flvCenterU,
+		'fltCenterV': flvCenterV,
+		'intCropWidth': int(math.floor(0.97 * intWidth)),
+		'intCropHeight': int(math.floor(0.97 * intHeight))
 	}
 
 	objTo = {
