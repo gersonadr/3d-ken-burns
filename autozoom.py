@@ -56,6 +56,10 @@ arguments_strOut = './autozoom.mp4'
 for strOption, strArgument in getopt.getopt(sys.argv[1:], '', [ strParameter[2:] + '=' for strParameter in sys.argv[1::2] ])[0]:
 	if strOption == '--in' and strArgument != '': arguments_strIn = strArgument # path to the input image
 	if strOption == '--out' and strArgument != '': arguments_strOut = strArgument # path to where the output should be stored
+	if strOption == '--centeru' and strArgument != '': arguments_strCenterU = strArgument # center horizontally (in pixels)
+	if strOption == '--centerv' and strArgument != '': arguments_strCenterV = strArgument # center vertically (in pixels)
+	if strOption == '--zoom' and strArgument != '': arguments_zoom = strArgument # zoom factor
+	if strOption == '--shift' and strArgument != '': arguments_shift = strArgument # shift ?
 # end
 
 ##########################################################
@@ -75,16 +79,31 @@ if __name__ == '__main__':
 
 	process_load(npyImage, {})
 
+	# defaults
+	flvCenterU = intWidth / 2.0
+	flvCenterV = intHeight / 2.0
+	flvShift = 100.0
+	flvZoom = 1.25
+
+	if arguments_strCenterU:
+		flvCenterU = int(arguments_strCenterU)
+	if arguments_strCenterV:
+		flvCenterV = int(arguments_strCenterV)
+	if arguments_shift:
+		flvZoom = float(arguments_shift)
+	if arguments_zoom:
+		flvZoom = float(arguments_zoom)
+
 	objFrom = {
-		'fltCenterU': intWidth / 2.0,
-		'fltCenterV': intHeight / 2.0,
+		'fltCenterU': flvCenterU,
+		'fltCenterV': flvCenterV,
 		'intCropWidth': int(math.floor(0.97 * intWidth)),
 		'intCropHeight': int(math.floor(0.97 * intHeight))
 	}
 
 	objTo = process_autozoom({
-		'fltShift': 100.0,
-		'fltZoom': 1.25,
+		'fltShift': flvShift,
+		'fltZoom': flvZoom,
 		'objFrom': objFrom
 	})
 
