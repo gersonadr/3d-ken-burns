@@ -94,6 +94,21 @@ if __name__ == '__main__':
 
 	process_load(npyImage, {})
 
+	# defaults
+	flvCenterU = intWidth / 2.0
+	flvCenterV = intHeight / 2.0
+	flvShift = 100.0
+	flvZoom = 1.25
+
+	if arguments_strCenterU != '':
+		flvCenterU = float(arguments_strCenterU)
+	if arguments_strCenterV != '':
+		flvCenterV = float(arguments_strCenterV)
+	if arguments_shift != '':
+		flvZoom = float(arguments_shift)
+	if arguments_zoom != '':
+		flvZoom = float(arguments_zoom)
+
 	objFrom = {
 		'fltCenterU': flvCenterU,
 		'fltCenterV': flvCenterV,
