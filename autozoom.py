@@ -28,6 +28,7 @@ import tempfile
 import time
 import urllib
 import zipfile
+import json
 
 ##########################################################
 
@@ -99,6 +100,9 @@ if __name__ == '__main__':
 		'fltZoom': zoom,
 		'objFrom': objFrom
 	})
+
+	print(json.dumps(objFrom, indent=4, sort_keys=True))
+	print(json.dumps(objTo, indent=4, sort_keys=True))
 
 	npyResult = process_kenburns({
 		'fltSteps': numpy.linspace(0.0, 1.0, steps).tolist(),
