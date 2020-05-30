@@ -52,9 +52,10 @@
 		</div>
 
 		<div style="bottom:16px; position:fixed; right:16px;">
+			<input value="75" style="" maxlength="4" size="4" id="stepsTxt" type="text">
 			<button class="btn btn-primary" id="autozoom" style="font-size:14px; position:relative; z-index:2;"><i class="fa fa-magic"></i></button>
 			<button class="btn btn-primary" id="load" style="font-size:14px; position:relative;"><i class="fa fa-folder-open"></i><input id="file" type="file" style="cursor:pointer; bottom:0px; height:100%; left:0px; opacity:0.0; position:absolute; right:0px; top:0px; width:100%; z-index:1;" /></button>
-			<a class="btn btn-primary" id="save" href="/get_result" target="_blank" style="font-size:14px; position:relative; z-index:2;"><i class="fa fa-save"></i></a>
+			<a class="btn btn-primary" id="save" onClick="invoke_get_result();" target="_blank" style="font-size:14px; position:relative; z-index:2;"><i class="fa fa-save"></i></a>
 		</div>
 
 		<script type="text/javascript">
@@ -132,6 +133,10 @@
 					});
 				})
 			;
+
+			var invoke_get_result = function(){
+				jQuery.get('/get_result?steps=' + jQuery("#stepsTxt").val());
+			}
 
 			jQuery('#file')
 				.on('click', function(objEvent) {

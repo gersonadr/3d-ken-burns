@@ -7,6 +7,7 @@ import base64
 import cupy
 import cv2
 import flask
+from flask import request
 import getopt
 import gevent
 import gevent.pywsgi
@@ -198,10 +199,11 @@ def get_live():
 def get_result():
 	strTempdir = tempfile.gettempdir() + '/kenburns-' + str(os.getpid()) + '-' + str.join('', [ random.choice('abcdefghijklmnopqrstuvwxyz0123456789') for intCount in range(20) ])
 
+	steps = int(request.args.get('steps'))
 	os.makedirs(strTempdir + '/')
 
 	npyKenburns = process_kenburns({
-		'fltSteps': numpy.linspace(0.0, 1.0, 75).tolist(),
+		'fltSteps': numpy.linspace(0.0, 1.0, steps).tolist(),
 		'objFrom': objPlayback['objFrom'],
 		'objTo': objPlayback['objTo'],
 		'boolInpaint': True
